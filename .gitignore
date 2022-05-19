@@ -348,3 +348,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+src/StaticWebApp/.vscode/settings.json
+src/UCP.SI.Bot/Properties/ServiceDependencies/ucp-si-bot-api - Web Deploy/profile.arm.json
