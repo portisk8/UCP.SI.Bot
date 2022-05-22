@@ -48,6 +48,7 @@ namespace UCP.SI.Bot.Dialogs
 
 			AddDialog(new TextPrompt(nameof(TextPrompt)));
 			AddDialog(new ChoicePrompt(nameof(ChoicePrompt)));
+			AddDialog(new AdaptiveCardPrompt("cardAdaptive"));
 
 			AddDialog(new AdaptiveCardPrompt("PrimerPreguntaCard"));
 			InitialDialogId = nameof(WaterfallDialog) + "_preguntasStep";
@@ -61,7 +62,11 @@ namespace UCP.SI.Bot.Dialogs
 			foreach (var item in profile.PreguntaRespuestaDone)
             {
 				message.AppendLine($"**{index++})** [{item.PreguntaId}] {item.Pregunta}");
-				message.AppendLine($"> Respuesta: ***{item.ChoiceSelected.Description}***");
+				message.AppendLine($"> Respuesta:");
+                foreach (var answer in item.ChoicesSelected)
+                {
+					message.AppendLine($"> ***{answer.Description}***");
+                }
 			}
 			await stepContext.Context.SendActivityAsync(MessageFactory.Text("Tus respuestas:"), cancellationToken);
 			await stepContext.Context.SendActivityAsync(MessageFactory.Text(message.ToString()), cancellationToken);

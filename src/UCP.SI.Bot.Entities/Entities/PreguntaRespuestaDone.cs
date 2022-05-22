@@ -6,6 +6,6 @@ namespace UCP.SI.Bot.Entities.Entities
     {
         public int PreguntaId { get; set; }
         public string Pregunta { get; set; }
-        public CustomChoice ChoiceSelected { get; set; }
+        public List<CustomChoice> ChoicesSelected { get; set; }
     }
 }
