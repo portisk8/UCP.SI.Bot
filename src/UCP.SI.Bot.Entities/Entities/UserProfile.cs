@@ -31,6 +31,7 @@ namespace UCP.SI.Bot.Entities.Entities
         public void Clear()
         {
             Token = string.Empty;
-        }
+            PreguntaRespuestaDone = new List<PreguntaRespuestaDone>();
     }
+}
 }

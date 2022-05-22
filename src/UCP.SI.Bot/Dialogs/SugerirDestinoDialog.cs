@@ -10,6 +10,7 @@ using UCP.SI.Bot.Core.Configurations.Interfaces;
 using UCP.SI.Bot.Dialogs.Utils;
 using UCP.SI.Bot.Entities.Cards;
 using UCP.SI.Bot.Entities.Entities;
+using UCP.SI.Bot.Entities.Factories;
 
 namespace UCP.SI.Bot.Dialogs
 {
@@ -59,6 +60,8 @@ namespace UCP.SI.Bot.Dialogs
 			UserProfile profile = await _userProfileAccessor.GetAsync(stepContext.Context, () => new UserProfile(), cancellationToken);
 			var message = new StringBuilder();
 			var index = 0;
+			var customChiceList = new List<CustomChoice>();
+			//Muestro las respuestas del usuario
 			foreach (var item in profile.PreguntaRespuestaDone)
             {
 				message.AppendLine($"**{index++})** [{item.PreguntaId}] {item.Pregunta}");
@@ -67,11 +70,38 @@ namespace UCP.SI.Bot.Dialogs
                 {
 					message.AppendLine($"> ***{answer.Description}***");
                 }
+				customChiceList.AddRange(item.ChoicesSelected);
 			}
 			await stepContext.Context.SendActivityAsync(MessageFactory.Text("Tus respuestas:"), cancellationToken);
 			await stepContext.Context.SendActivityAsync(MessageFactory.Text(message.ToString()), cancellationToken);
+			//Obtengo el Top10 de las ciudades
+			var top10Cities = GetTop10Cities(customChiceList);
+			message = new StringBuilder();
+			message.AppendLine($"**Top 10 de los lugares recomendados:**");
+			index = 1;
+			foreach (var city in top10Cities)
+            {
+				message.AppendLine($"> **{index++}°** {city.CityName} {city.TotalMatch}/{city.AnswerEnums.Count} ({city.TotalPercent}%)");
+			}
+			await stepContext.Context.SendActivityAsync(MessageFactory.Text(message.ToString()), cancellationToken);
+
+			//Limpiamos el Profile para empezar de nuevo con las preguntas
+			profile.Clear();
+			await _userProfileAccessor.SetAsync(stepContext.Context, profile);
+			await _userState.SaveChangesAsync(stepContext.Context);
 
 			return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
 		}
+
+		private List<City> GetTop10Cities(List<CustomChoice> customChoices)
+        {
+			var cityListReturn = new List<City>();
+			var cityList = CityFactory.GetCities();
+			foreach (var city in cityList)
+            {
+				city.CustomChoices = customChoices;
+            }
+			return cityList.OrderByDescending(x=> x.TotalPercent).Take(10).ToList();
+        }
 	}
 }
