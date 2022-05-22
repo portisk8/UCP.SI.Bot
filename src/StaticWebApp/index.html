@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <head>
-  <link rel="stylesheet" href="mystyle.css" />
   <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
   <!-- CSS only -->
   <link
@@ -70,6 +69,20 @@
       bubbleFromUserTextColor: "white",
       bubbleBorderRadius: "5px",
       bubbleFromUserBorderRadius: "5px",
+
+      sendBoxButtonColor: "#2750FA",
+      transcriptOverlayButtonColor: "red",
+      transcriptOverlayButtonColorOnDisabled: "green",
+
+      /**
+       * Default value is transcriptOverlayButtonColor
+       */
+      transcriptOverlayButtonColorOnFocus: "orange",
+
+      /**
+       * Default value is transcriptOverlayButtonColor
+       */
+      transcriptOverlayButtonColorOnHover: "yellow",
     });
 
     // After generated, you can modify the CSS rules.
@@ -97,4 +110,5 @@
       document.getElementById("webchat")
     );
   </script>
+  <link rel="stylesheet" href="main.css" />
 </body>
