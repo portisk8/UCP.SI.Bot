@@ -1,4 +1,5 @@
 ﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.AI.QnA.Dialogs;
 using Microsoft.Bot.Builder.Dialogs;
 using System;
 using System.Collections.Generic;
@@ -11,11 +12,13 @@ using UCP.SI.Bot.Dialogs.Utils;
 using UCP.SI.Bot.Entities.Cards;
 using UCP.SI.Bot.Entities.Entities;
 using UCP.SI.Bot.Entities.Factories;
+using UCP.SI.Bot.Infrastructure.Interfaces;
 
 namespace UCP.SI.Bot.Dialogs
 {
     public class SugerirDestinoDialog : ComponentDialog
-    {
+	{
+		protected readonly IBotService _botService;
 		private readonly IStatePropertyAccessor<UserProfile> _userProfileAccessor;
 		private readonly ConversationState _convesationState;
 		private readonly UserState _userState;
@@ -23,11 +26,13 @@ namespace UCP.SI.Bot.Dialogs
 		private WaterfallStep[] _preguntasStep;
 
 		public SugerirDestinoDialog(
+							IBotService botService,
 							UserState userState,
 							ICurrentConfiguration currentConfiguration,
 							ConversationState convesationState)
 			: base(nameof(SugerirDestinoDialog))
 		{
+			_botService = botService;
 			_userState = userState;
 			_userProfileAccessor = userState.CreateProperty<UserProfile>(nameof(UserProfile));
 			_convesationState = convesationState;
@@ -50,6 +55,7 @@ namespace UCP.SI.Bot.Dialogs
 			AddDialog(new TextPrompt(nameof(TextPrompt)));
 			AddDialog(new ChoicePrompt(nameof(ChoicePrompt)));
 			AddDialog(new AdaptiveCardPrompt("cardAdaptive"));
+			AddDialog(new QnAMakerBaseDialog(_botService, _currentConfiguration));
 
 			AddDialog(new AdaptiveCardPrompt("PrimerPreguntaCard"));
 			InitialDialogId = nameof(WaterfallDialog) + "_preguntasStep";
@@ -81,16 +87,19 @@ namespace UCP.SI.Bot.Dialogs
 			index = 1;
 			foreach (var city in top10Cities)
             {
-				message.AppendLine($"> **{index++}°** {city.CityName} {city.TotalMatch}/{city.AnswerEnums.Count} ({city.TotalPercent}%)");
-			}
-			await stepContext.Context.SendActivityAsync(MessageFactory.Text(message.ToString()), cancellationToken);
+                message.AppendLine($"> **{index++}°** [**{city.CityName}**]({city.CityUrl}) {city.TotalMatch}/{city.AnswerEnums.Count} ({city.TotalPercent}%)");
+
+            }
+            await stepContext.Context.SendActivityAsync(MessageFactory.Text(message.ToString()), cancellationToken);
+			stepContext.Context.Activity.Text = top10Cities.FirstOrDefault().CityCode;
 
 			//Limpiamos el Profile para empezar de nuevo con las preguntas
 			profile.Clear();
 			await _userProfileAccessor.SetAsync(stepContext.Context, profile);
 			await _userState.SaveChangesAsync(stepContext.Context);
 
-			return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
+			return await stepContext.BeginDialogAsync(nameof(QnAMakerDialog), cancellationToken: cancellationToken);
+			//return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
 		}
 
 		private List<City> GetTop10Cities(List<CustomChoice> customChoices)

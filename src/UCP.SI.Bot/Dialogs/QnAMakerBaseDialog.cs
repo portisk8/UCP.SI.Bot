@@ -8,6 +8,7 @@ using Microsoft.Bot.Schema;
 using System.Threading;
 using System.Threading.Tasks;
 using UCP.SI.Bot.Core.Configurations;
+using UCP.SI.Bot.Core.Configurations.Interfaces;
 
 namespace UCP.SI.Bot.Dialogs
 {
@@ -19,13 +20,13 @@ namespace UCP.SI.Bot.Dialogs
         public const string DefaultCardTitle = "Did you mean:";
         public const string DefaultCardNoMatchText = "None of the above.";
         public const string DefaultCardNoMatchResponse = "Thanks for the feedback.";
-        protected readonly BotSettings _settings;
+        private readonly ICurrentConfiguration _currentConfiguration;
 
 
-        public QnAMakerBaseDialog(IBotService service, BotSettings settings) : base()
+        public QnAMakerBaseDialog(IBotService service, ICurrentConfiguration currentConfiguration) : base()
         {
             this._service = service;
-            _settings = settings;
+            _currentConfiguration = currentConfiguration;
         }
 
         protected async override Task<IQnAMakerClient> GetQnAMakerClientAsync(DialogContext dc)

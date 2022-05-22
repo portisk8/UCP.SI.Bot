@@ -13,20 +13,20 @@ namespace UCP.SI.Bot.Infrastructure
         public BotService(IConfiguration configuration)
         {
             //Luis configurations
-            var luisApplication = new LuisApplication(
-                configuration["LuisAppId"],
-                configuration["LuisAPIKey"],
-                configuration["LuisHostname"]);
+            //var luisApplication = new LuisApplication(
+            //    configuration["LuisAppId"],
+            //    configuration["LuisAPIKey"],
+            //    configuration["LuisHostname"]);
 
-            var reconizerOptions = new LuisRecognizerOptionsV3(luisApplication)
-            {
-                PredictionOptions = new Microsoft.Bot.Builder.AI.LuisV3.LuisPredictionOptions()
-                {
-                    IncludeInstanceData = true,
-                }
-            };
+            //var reconizerOptions = new LuisRecognizerOptionsV3(luisApplication)
+            //{
+            //    PredictionOptions = new Microsoft.Bot.Builder.AI.LuisV3.LuisPredictionOptions()
+            //    {
+            //        IncludeInstanceData = true,
+            //    }
+            //};
 
-            Recognizer = new LuisRecognizer(reconizerOptions);
+            //Recognizer = new LuisRecognizer(reconizerOptions);
 
             //QnA configurations
             QnA = new QnAMaker(new QnAMakerEndpoint

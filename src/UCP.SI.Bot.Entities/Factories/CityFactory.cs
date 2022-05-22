@@ -20,6 +20,7 @@ namespace UCP.SI.Bot.Entities.Factories
             {
                 CityName = "Misiones",
                 CityCode = "misiones",
+                CityUrl = "https://www.welcomeargentina.com/misiones/",
                 CityId = index++,
                 AnswerEnums = new List<AnswerEnum> {
                     AnswerEnum.VERANO,
@@ -47,6 +48,7 @@ namespace UCP.SI.Bot.Entities.Factories
             {
                 CityName = "Mar del Plata",
                 CityCode = "mar_del_plata",
+                CityUrl = "https://www.welcomeargentina.com/mardelplata/",
                 CityId = index++,
                 AnswerEnums = new List<AnswerEnum> {
                     AnswerEnum.VERANO,
@@ -76,6 +78,7 @@ namespace UCP.SI.Bot.Entities.Factories
             {
                 CityName = "San Juan",
                 CityCode = "san_juan",
+                CityUrl = "https://www.welcomeargentina.com/provincia-san-juan/",
                 CityId = index++,
                 AnswerEnums = new List<AnswerEnum> {
                     AnswerEnum.OTOÑO,
@@ -104,6 +107,7 @@ namespace UCP.SI.Bot.Entities.Factories
             {
                 CityName = "Ciudad Autónoma de Buenos Aires",
                 CityCode = "ciudad_autonoma_buenos_aires",
+                CityUrl = "https://www.welcomeargentina.com/ciudadbuenosaires/",
                 CityId = index++,
                 AnswerEnums = new List<AnswerEnum> {
                     AnswerEnum.INVIERNO,
@@ -133,6 +137,7 @@ namespace UCP.SI.Bot.Entities.Factories
             {
                 CityName = "Bariloche, Rio Negro",
                 CityCode = "bariloche_rio_negro",
+                CityUrl = "https://www.welcomeargentina.com/bariloche/",
                 CityId = index++,
                 AnswerEnums = new List<AnswerEnum> {
                     AnswerEnum.INVIERNO,
@@ -162,6 +167,7 @@ namespace UCP.SI.Bot.Entities.Factories
             {
                 CityName = "Santa Cruz",
                 CityCode = "santa_cruz",
+                CityUrl = "https://www.welcomeargentina.com/santa-cruz/",
                 CityId = index++,
                 AnswerEnums = new List<AnswerEnum> {
                     AnswerEnum.INVIERNO,
@@ -189,6 +195,7 @@ namespace UCP.SI.Bot.Entities.Factories
             {
                 CityName = "Mendoza",
                 CityCode = "mendoza",
+                CityUrl = "https://www.welcomeargentina.com/provincia-mendoza/",
                 CityId = index++,
                 AnswerEnums = new List<AnswerEnum> {
                     AnswerEnum.INVIERNO,
@@ -220,6 +227,7 @@ namespace UCP.SI.Bot.Entities.Factories
             {
                 CityName = "Ushuaia",
                 CityCode = "ushuaia",
+                CityUrl = "https://www.welcomeargentina.com/ushuaia/",
                 CityId = index++,
                 AnswerEnums = new List<AnswerEnum> {
                     AnswerEnum.VERANO,
@@ -249,6 +257,7 @@ namespace UCP.SI.Bot.Entities.Factories
             {
                 CityName = "Corrientes",
                 CityCode = "corrientes",
+                CityUrl = "https://www.welcomeargentina.com/provincia-corrientes/",
                 CityId = index++,
                 AnswerEnums = new List<AnswerEnum> {
                     AnswerEnum.VERANO,
@@ -277,6 +286,7 @@ namespace UCP.SI.Bot.Entities.Factories
             {
                 CityName = "Salta",
                 CityCode = "salta",
+                CityUrl = "https://www.welcomeargentina.com/provincia-salta/",
                 CityId = index++,
                 AnswerEnums = new List<AnswerEnum> {
                     AnswerEnum.OTOÑO,
@@ -302,6 +312,7 @@ namespace UCP.SI.Bot.Entities.Factories
             {
                 CityName = "Jujuy",
                 CityCode = "jujuy",
+                CityUrl = "https://www.welcomeargentina.com/provincia-jujuy/",
                 CityId = index++,
                 AnswerEnums = new List<AnswerEnum> {
                     AnswerEnum.INVIERNO,
@@ -326,6 +337,7 @@ namespace UCP.SI.Bot.Entities.Factories
             {
                 CityName = "Córdoba Capital",
                 CityCode = "cordoba_capital",
+                CityUrl = "https://www.welcomeargentina.com/cordoba/",
                 CityId = index++,
                 AnswerEnums = new List<AnswerEnum> {
                     AnswerEnum.OTOÑO,
@@ -355,6 +367,7 @@ namespace UCP.SI.Bot.Entities.Factories
             {
                 CityName = "Carlos Paz",
                 CityCode = "carlos_paz_frio",
+                CityUrl = "https://www.welcomeargentina.com/villacarlospaz/",
                 CityId = index++,
                 AnswerEnums = new List<AnswerEnum> {
                     AnswerEnum.OTOÑO,
@@ -389,6 +402,7 @@ namespace UCP.SI.Bot.Entities.Factories
             {
                 CityName = "Carlos Paz",
                 CityCode = "carlos_paz_calor",
+                CityUrl = "https://www.welcomeargentina.com/villacarlospaz/",
                 CityId = index++,
                 AnswerEnums = new List<AnswerEnum> {
                     AnswerEnum.VERANO,

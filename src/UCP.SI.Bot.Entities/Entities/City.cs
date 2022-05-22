@@ -12,6 +12,7 @@ namespace UCP.SI.Bot.Entities.Entities
         public string CityName { get; set; }
         public string CityCode { get; set; }
         public int CityId { get; set; }
+        public string CityUrl { get; set; }
         public List<AnswerEnum> AnswerEnums { get; set; } = new List<AnswerEnum>();
         public List<CustomChoice> CustomChoices { get; set; }
         

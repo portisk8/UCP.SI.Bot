@@ -17,6 +17,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using UCP.SI.Bot.Infrastructure.Interfaces;
+using UCP.SI.Bot.Infrastructure;
 
 namespace UCP.SI.Bot
 {
@@ -66,7 +68,7 @@ namespace UCP.SI.Bot
             // Create the Twilio Adapter
             //services.AddSingleton<Microsoft.Bot.Builder.Adapters.Twilio.TwilioAdapter, Adapters.TwilioAdapterWithErrorHandler>();
 
-            //services.AddSingleton<IBotService, BotService>();
+            services.AddSingleton<IBotService, BotService>();
 
             //Para solucionar issue:  https://stackoverflow.com/questions/67816160/how-to-close-the-qnamker-dialog-while-using-multiturn-qna-kb-and-luis-with-the-h
             //https://github.com/microsoft/BotBuilder-Samples/issues/3194

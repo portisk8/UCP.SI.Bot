@@ -19,17 +19,20 @@ namespace UCP.SI.Bot.Dialogs
         private const string InitialDialog = "initial-dialog";
 
         private readonly ConversationState _convesationState;
+        protected readonly IBotService _botService;
         protected readonly ICurrentConfiguration _currentConfiguration;
 		private readonly IStatePropertyAccessor<UserProfile> _userProfileAccessor;
         private WaterfallStep[] _finalizarConversacionStep;
         private readonly IStatePropertyAccessor<ConversationData> _conversationDataAccessor;
 
-        public RootDialog(ConversationState conversationState, 
+        public RootDialog(ConversationState conversationState,
+            IBotService botService,
             UserState userState,
             ICurrentConfiguration currentConfiguration) 
             : base(nameof(RootDialog))
         {
-            _convesationState = conversationState;   
+            _convesationState = conversationState;
+            _botService = botService;
             _currentConfiguration = currentConfiguration;
 			_userProfileAccessor = userState.CreateProperty<UserProfile>(nameof(UserProfile));
             _conversationDataAccessor = conversationState.CreateProperty<ConversationData>(nameof(ConversationData));
@@ -40,7 +43,7 @@ namespace UCP.SI.Bot.Dialogs
             };
 
 			AddDialog(new TextPrompt(nameof(TextPrompt)));
-            AddDialog(new SugerirDestinoDialog(userState, currentConfiguration,conversationState));
+            AddDialog(new SugerirDestinoDialog(_botService, userState, currentConfiguration,conversationState));
 			AddDialog(new ChoicePrompt(nameof(ChoicePrompt)));
 
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), steps));
